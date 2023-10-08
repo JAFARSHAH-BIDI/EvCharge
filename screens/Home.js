@@ -16,10 +16,10 @@ import {
 } from "../services/collections";
 import { firestore, auth } from "firebase";
 
-const ListButton = ({ title, color, onPress, onDelete, onOptions }) => {
+const ListButton = ({ title, name, onPress, onDelete, onOptions }) => {
     return (
         <TouchableOpacity
-            style={[styles.itemContainer, { backgroundColor: color }]}
+            style={[styles.itemContainer, { backgroundColor: "blue" }]}
             onPress={onPress}
         >
             <View>
@@ -87,9 +87,9 @@ export default ({ navigation }) => {
         );
     }, []);
 
-    const addItemToLists = ({ title, color }) => {
+    const addItemToLists = ({ title, name }) => {
         const index = lists.length > 1 ? lists[lists.length - 1].index + 1 : 0;
-        addDoc(listsRef, { title, color, index });
+        addDoc(listsRef, { title, name, index });
     };
 
     const removeItemFromLists = (id) => {
@@ -110,23 +110,23 @@ export default ({ navigation }) => {
         <View style={styles.container}>
             <FlatList
                 data={lists}
-                renderItem={({ item: { title, color, id, index } }) => {
+                renderItem={({ item: { title, name, id, index } }) => {
                     return (
                         <ListButton
                             title={title}
-                            color={color}
+                            color="blue"
                             navigation={navigation}
                             onPress={() => {
                                 navigation.navigate("ToDoList", {
                                     title,
-                                    color,
+                                    name,
                                     listId: id,
                                 });
                             }}
                             onOptions={() => {
                                 navigation.navigate("Edit", {
                                     title,
-                                    color,
+                                    name,
                                     saveChanges: (newItem) =>
                                         updateItemFromLists(id, {
                                             index,

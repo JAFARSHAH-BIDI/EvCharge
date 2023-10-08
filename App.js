@@ -43,10 +43,10 @@ const Screens = () => {
                 component={EditList}
                 options={({ route }) => {
                     return {
-                        title: "Add New Vehicle",
-                        // title: route.params.title
-                        //     ? `Edit ${route.params.title} list`
-                        //     : "Add New Vehicle",
+                        // title: "Add New Vehicle",
+                        title: route.params.title
+                            ? `Edit ${route.params.title} Vehicle Detail`
+                            : "Add New Vehicle",
                         headerStyle: {
                             backgroundColor: route.params.color || Colors.blue,
                         },

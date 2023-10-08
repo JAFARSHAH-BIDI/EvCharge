@@ -11,29 +11,38 @@ import Colors from "../constants/Colors";
 import ColorSelector from "../components/ColorSelector";
 import Button from "../components/Button";
 
-const colorList = [
-    "blue",
-    "teal",
-    "green",
-    "olive",
-    "yellow",
-    "orange",
-    "red",
-    "pink",
-    "purple",
-    "blueGray",
-];
+// const colorList = [
+//     "blue",
+//     "teal",
+//     "green",
+//     "olive",
+//     "yellow",
+//     "orange",
+//     "red",
+//     "pink",
+//     "purple",
+//     "blueGray",
+// ];
 
 export default ({ navigation, route }) => {
     const [title, setTitle] = useState(route.params.title || "");
-    const [color, setColor] = useState(route.params.color || Colors.blue);
+    // const [color, setColor] = useState(route.params.color || Colors.blue);
     const [isValid, setValidity] = useState(true);
+    const [name, setName] = useState(route.params.name || "");
+    const totalPowerConsumption = "";
+    const voltage = "";
+    const current = "";
+    const battery ="";
+    const totalCharges = "";
+    const chargeDuration = "";
+    const totalEnergy = "";
+     
 
     return (
         <View style={styles.container}>
             <View>
                 <View style={{ flexDirection: "row" }}>
-                    <Text style={styles.label}>List Name</Text>
+                    <Text style={styles.label}>Vehical Number</Text>
                     {!isValid && (
                         <Text
                             style={{
@@ -42,7 +51,7 @@ export default ({ navigation, route }) => {
                                 fontSize: 12,
                             }}
                         >
-                            * List Name cannot be empty
+                            * Vehicle Number cannot be empty
                         </Text>
                     )}
                 </View>
@@ -55,11 +64,40 @@ export default ({ navigation, route }) => {
                         setTitle(text);
                         setValidity(true);
                     }}
-                    placeholder={"New List Name"}
+                    placeholder={"New Vehicle Number"}
                     maxLength={30}
                     style={[styles.input, { outline: "none" }]}
                 />
-                <Text style={styles.label}>Choose Color</Text>
+
+                <br/>
+                <Text style={styles.label}>Vehicle Owner Name</Text>
+                <TextInput
+                    underlineColorAndroid={"transparent"}
+                    selectionColor={"transparent"}
+                    autoFocus={true}
+                    value={name}
+                    onChangeText={(text) => {
+                        setName(text);
+                        setValidity(true);
+                    }}
+                    placeholder={"Vehicle Owner Name"}
+                    maxLength={30}
+                    style={[styles.input, { outline: "none" }]}
+                />
+                {/* <TextInput
+                    underlineColorAndroid={"transparent"}
+                    selectionColor={"transparent"}
+                    autoFocus={true}
+                    value={title}
+                    onChangeText={(text) => {
+                        setTitle(text);
+                        setValidity(true);
+                    }}
+                    placeholder={"New List Name"}
+                    maxLength={30}
+                    style={[styles.input, { outline: "none" }]}
+                /> */}
+                {/* <Text style={styles.label}>Choose Color</Text>
                 <ColorSelector
                     onSelect={(color) => {
                         setColor(color);
@@ -67,13 +105,13 @@ export default ({ navigation, route }) => {
                     }}
                     selectedColor={color}
                     colorOptions={colorList}
-                />
+                /> */}
             </View>
             <Button
                 text="Save"
                 onPress={() => {
                     if (title.length > 1) {
-                        route.params.saveChanges({ title, color });
+                        route.params.saveChanges({ title, name });
                         navigation.dispatch(CommonActions.goBack());
                     } else {
                         setValidity(false);
