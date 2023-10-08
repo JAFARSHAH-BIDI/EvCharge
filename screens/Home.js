@@ -29,9 +29,10 @@ const ListButton = ({ title, name, onPress, onDelete, onOptions }) => {
                 <TouchableOpacity onPress={onOptions}>
                     <Ionicons name="options-outline" size={24} color="white" />
                 </TouchableOpacity>
+
                 <TouchableOpacity onPress={onDelete}>
                     <Ionicons name="trash-outline" size={24} color="white" />
-                </TouchableOpacity>
+                </TouchableOpacity>  
             </View>
         </TouchableOpacity>
     );
@@ -87,9 +88,9 @@ export default ({ navigation }) => {
         );
     }, []);
 
-    const addItemToLists = ({ title, name }) => {
+    const addItemToLists = ({ title, name, voltage, current }) => {
         const index = lists.length > 1 ? lists[lists.length - 1].index + 1 : 0;
-        addDoc(listsRef, { title, name, index });
+        addDoc(listsRef, { title, name, index, voltage, current });
     };
 
     const removeItemFromLists = (id) => {
@@ -110,23 +111,37 @@ export default ({ navigation }) => {
         <View style={styles.container}>
             <FlatList
                 data={lists}
-                renderItem={({ item: { title, name, id, index } }) => {
+                renderItem={({ item: { title, name, id, index, voltage, current, battery  } }) => {
                     return (
                         <ListButton
                             title={title}
                             color="blue"
                             navigation={navigation}
-                            onPress={() => {
-                                navigation.navigate("ToDoList", {
-                                    title,
-                                    name,
-                                    listId: id,
-                                });
-                            }}
+                            // onPress={() => {
+                            //     navigation.navigate("ToDoList", {
+                            //         title,
+                            //         name,
+                            //         listId: id,
+                            //     });
+                            // }}
                             onOptions={() => {
                                 navigation.navigate("Edit", {
                                     title,
                                     name,
+                                    id,
+                                    saveChanges: (newItem) =>
+                                        updateItemFromLists(id, {
+                                            index,
+                                            ...newItem,
+                                        }),
+                                });
+                            }}
+                            onPress={() => {
+                                navigation.navigate("ViewData", {
+                                    title,
+                                    name,
+                                    voltage,
+                                    current,
                                     saveChanges: (newItem) =>
                                         updateItemFromLists(id, {
                                             index,

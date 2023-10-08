@@ -8,6 +8,7 @@ import Login from "./screens/Login";
 import Settings from "./screens/Settings";
 import Colors from "./constants/Colors";
 import firebase from "firebase/app";
+import BatteryIndicator from './screens/ViewData'
 import "firebase/firestore";
 
 const Stack = createStackNavigator();
@@ -22,8 +23,10 @@ const AuthScreens = () => {
 };
 const Screens = () => {
     return (
+        
         <Stack.Navigator>
             <Stack.Screen name="ChargeEv" component={Home} />
+            <Stack.Screen name="ViewData" component={BatteryIndicator} />
             <Stack.Screen name="Settings" component={Settings} />
             <Stack.Screen
                 name="ToDoList"

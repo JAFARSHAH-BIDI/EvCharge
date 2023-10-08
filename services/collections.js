@@ -12,6 +12,7 @@ export const onSnapshot = (ref, callback, options) => {
 };
 
 export const addDoc = (ref, { id, ...data }) => {
+    console.log(data)
     const doc = id ? ref.doc(id) : ref.doc();
     doc.set(data).then(() => {
         console.log("Add new item");

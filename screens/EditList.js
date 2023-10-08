@@ -25,17 +25,18 @@ import Button from "../components/Button";
 // ];
 
 export default ({ navigation, route }) => {
+    console.log('edit list data', route);
     const [title, setTitle] = useState(route.params.title || "");
     // const [color, setColor] = useState(route.params.color || Colors.blue);
     const [isValid, setValidity] = useState(true);
     const [name, setName] = useState(route.params.name || "");
-    const totalPowerConsumption = "";
-    const voltage = "";
-    const current = "";
-    const battery ="";
-    const totalCharges = "";
-    const chargeDuration = "";
-    const totalEnergy = "";
+    const totalPowerConsumption = 20;
+    const voltage = route.params.voltage? route.params.voltage:0;
+    const current = route.params.current? route.params.current:0;
+    const batteryCharge = route.params.batteryCharge? route.params.batteryCharge:0;
+    const totalCharges = 20;
+    const chargeDuration = 20;
+    const totalEnergy = 20;
      
 
     return (
@@ -83,35 +84,13 @@ export default ({ navigation, route }) => {
                     placeholder={"Vehicle Owner Name"}
                     maxLength={30}
                     style={[styles.input, { outline: "none" }]}
-                />
-                {/* <TextInput
-                    underlineColorAndroid={"transparent"}
-                    selectionColor={"transparent"}
-                    autoFocus={true}
-                    value={title}
-                    onChangeText={(text) => {
-                        setTitle(text);
-                        setValidity(true);
-                    }}
-                    placeholder={"New List Name"}
-                    maxLength={30}
-                    style={[styles.input, { outline: "none" }]}
-                /> */}
-                {/* <Text style={styles.label}>Choose Color</Text>
-                <ColorSelector
-                    onSelect={(color) => {
-                        setColor(color);
-                        navigation.dispatch(CommonActions.setParams({ color }));
-                    }}
-                    selectedColor={color}
-                    colorOptions={colorList}
-                /> */}
-            </View>
+                />      
+                      </View>
             <Button
                 text="Save"
                 onPress={() => {
                     if (title.length > 1) {
-                        route.params.saveChanges({ title, name });
+                        route.params.saveChanges({ title, name, voltage, current, batteryCharge   });
                         navigation.dispatch(CommonActions.goBack());
                     } else {
                         setValidity(false);

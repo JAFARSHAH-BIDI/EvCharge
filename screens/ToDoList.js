@@ -7,7 +7,6 @@ import {
     FlatList,
 } from "react-native";
 import ToDoItem from "../components/ToDoItem";
-import Colors from "../constants/Colors";
 import {
     onSnapshot,
     addDoc,
@@ -36,6 +35,7 @@ export default ({ navigation, route }) => {
         .collection("todoItems");
 
     useEffect(() => {
+        console.log('inside todolist ')
         onSnapshot(
             toDoItemsRef,
             (newToDoItems) => {
